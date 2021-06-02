@@ -1,0 +1,52 @@
+class Solution {
+    public int integerBreak(int n) {
+        int[] dp=new int[n+1];
+       
+        dp[0]=0;
+        dp[1]=0; //for consistent structure
+        dp[2]=1;
+        
+        
+        if(n>2)
+        {
+            dp[3]=2;
+             for(int i=4;i<=n;i++)
+        {
+            for(int j=i-1;j>=1;j--)
+            {
+                int f_int;
+                int s_int;
+                
+                
+                if(dp[j]<j)
+               {
+                    f_int=j;   
+               }
+               else
+               {
+                    f_int=dp[j];
+               }
+       
+               if(dp[i-j]<i-j)
+               {
+                    s_int=i-j;   
+               }
+               else
+               {
+                    s_int=dp[i-j];
+               }   
+               
+                
+                
+                
+                dp[i]=Math.max(dp[i],f_int*s_int);
+            }
+        }
+        }
+       
+       
+       
+        return dp[n];
+    }
+    
+}
