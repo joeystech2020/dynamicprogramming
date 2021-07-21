@@ -1,0 +1,82 @@
+class Solution {
+    public int maxAbsoluteSum(int[] a) {
+      int[] max=new int[a.length];
+        int[] min = new int[a.length];
+
+        max[0]=a[0];
+        min[0]=a[0];
+        int maxy = 0;
+        int miny = 0;
+
+        if(a.length==1)
+        {
+             if(a[0]<0)
+             {
+                 return -a[0];
+             }
+             else{return a[0];}
+        }
+
+
+        for(int i=1;i<a.length;i++)
+        {
+            if(a[i] >= a[i] + max[i-1])
+            {
+                max[i]=a[i];
+
+            }
+            else if(a[i] <= a[i]+max[i-1])
+            {
+                max[i]= a[i]+max[i-1];
+
+            }
+
+            if(max[i]>maxy)
+            {
+                maxy=max[i];
+            }
+        }
+
+        for(int i=1;i<a.length;i++)
+        {
+            if(a[i] >= a[i]+min[i-1])
+            {
+                min[i]=a[i]+min[i-1];
+
+            }
+            else if(a[i] <= a[i]+min[i-1])
+            {
+                min[i]= a[i];
+
+            }
+
+            if(-min[i] > miny)
+            {
+                miny=-min[i];
+            }
+            else if(min[i] > miny)
+            {
+                miny = min[i];
+            }
+
+        }
+        if(miny < min[0])
+        {
+            miny=min[0];
+        }
+        if(maxy < max[0])
+        {
+            maxy = max[0];
+        }
+
+       
+        if(miny > maxy)
+        {
+            return miny;
+        }
+        else {
+            return maxy;
+        }
+       
+    }
+}
